@@ -125,7 +125,7 @@ server <- function(input, output) {
       input_data$Label = as.factor(input_data$Label )
       
       levels(input_data$Label) <- c("Healthy", "Unhealthy")
-      head(input_data)
+      head(input_data, 15)
     }
   })
   
@@ -172,7 +172,7 @@ server <- function(input, output) {
   
   output$sample_predictions = renderTable({   # the last 6 rows to show
     pred = predictions()
-    head(pred)
+    head(pred, 15)
     
   })
   
@@ -200,13 +200,13 @@ server <- function(input, output) {
       write.csv(predictions(), file, row.names = FALSE)
     })
   
-  output$downloadData <- downloadHandler(
-    filename = function() {
-      paste("input_data_with_predictions", ".rds", sep = "")
-    },
-    content = function(file) {
-      saveRDS(predictions(), file)
-    })
+  # output$downloadData <- downloadHandler(
+  #   filename = function() {
+  #     paste("input_data_with_predictions", ".rds", sep = "")
+  #   },
+  #   content = function(file) {
+  #     saveRDS(predictions(), file)
+  #   })
   
 }
 
